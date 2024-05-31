@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
 
   async refreshToken(req: Request, res: Response): Promise<string> {
-    const refreshToken = req.cookies['refresh_token'];
+    const refreshToken = req.cookies['refreshToken'];
 
     if (!refreshToken) {
       throw new UnauthorizedException('Refresh token not found');
@@ -57,7 +57,7 @@ export class AuthService {
       },
     );
 
-    res.cookie('access_token', accessToken, { httpOnly: true });
+    res.cookie('accessToken', accessToken, { httpOnly: true });
 
     return accessToken;
   }
@@ -85,8 +85,8 @@ export class AuthService {
       },
     );
 
-    res.cookie('access_token', accessToken, { httpOnly: true });
-    res.cookie('refresh_token', refreshToken, { httpOnly: true });
+    res.cookie('accessToken', accessToken, { httpOnly: true });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true });
 
     return { user };
   }
@@ -140,8 +140,8 @@ export class AuthService {
   }
 
   async logout(res: Response) {
-    res.clearCookie('access_token');
-    res.clearCookie('refresh_token');
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
     return 'Successfully logged out';
   }
 }
